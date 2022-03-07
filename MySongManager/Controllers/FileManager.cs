@@ -12,10 +12,9 @@ namespace SongManagerFL.Controllers
     internal class FileManager
     {
         private StorageFolder mainFolder;
-        
 
-        //TODO: 
-        //Add opportunity to choose projects folder location 
+ 
+
         public void GenerateProjectsFolder()
         {
             //Generating folder for projects 
@@ -35,7 +34,7 @@ namespace SongManagerFL.Controllers
             foreach (StorageFile file in files)
             {
                 string currentFileName = file.Name;
-                if (file.Name.Contains("_demo") || file.Name.Contains("_final"))
+                if (file.Name.Contains("_demo") || file.Name.Contains("_final") )
                 {
                     currentFileName = currentFileName.Remove(currentFileName.IndexOf('_'));
                 }
