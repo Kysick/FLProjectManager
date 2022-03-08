@@ -1,11 +1,14 @@
 ﻿
+using MySongManager;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Windows.Storage;
+using Windows.Storage.FileProperties;
 
 namespace SongManagerFL.Controllers
 {
@@ -51,6 +54,21 @@ namespace SongManagerFL.Controllers
                 newProjectFolder = await songManagerFolder.GetFolderAsync(currentFileName);
                 await file.MoveAsync(newProjectFolder, file.Name);
             }
+        }
+
+        public async Task<ObservableCollection<MusicProject>> FillMusicProjectList()
+        {
+            ObservableCollection<MusicProject> list = new ObservableCollection<MusicProject>();
+            StorageFolder projectsFolder = await KnownFolders.MusicLibrary.GetFolderAsync("SongManagerProjects");
+            IReadOnlyList<StorageFolder> projects = await projectsFolder.GetFoldersAsync();
+            foreach (StorageFolder folder in projects)
+            {
+                BasicProperties basic = await folder.GetBasicPropertiesAsync();
+
+                list.Add(new MusicProject(folder.DisplayName, folder.Path, basic.DateModified.DateTime));
+            }
+
+            return list;
         }
 
         

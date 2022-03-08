@@ -12,9 +12,10 @@ namespace MySongManager
 
         private string _projectPath;
 
-        private DateTimeOffset _date;
+        private DateTime _date;
 
-        public MusicProject(string projectName, string projectPath, DateTimeOffset date)
+
+        public MusicProject(string projectName, string projectPath, DateTime date)
         {
             _projectName = projectName ?? throw new ArgumentNullException(nameof(projectName));
             _projectPath = projectPath ?? throw new ArgumentNullException(nameof(projectPath));
@@ -24,6 +25,8 @@ namespace MySongManager
         public string ProjectName { get { return _projectName; } set { _projectName = value; } }
 
         public string ProjectPath { get => _projectPath; set => _projectPath = value; }
-        public DateTimeOffset Date { get => _date.LocalDateTime; set => _date = value; }
+        public DateTime Date { get => _date; set => _date = value; }
+       
+
     }
 }

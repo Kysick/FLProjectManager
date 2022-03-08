@@ -15,14 +15,17 @@
                     <Grid>
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="500" />
-                            <ColumnDefinition Width="100" />
+                            <ColumnDefinition Width="200" />
                         </Grid.ColumnDefinitions>
-                        
-                        <StackPanel Margin="10" Grid.Column="0">
+
+                        <StackPanel Margin="10" Padding="10" Grid.Column="0" >
                         <TextBlock FontSize="20" Text="{x:Bind ProjectName}" HorizontalAlignment="Left"  />
                             <TextBlock FontSize="14" Text="{x:Bind ProjectPath}" HorizontalAlignment="Left" Opacity="0.5" />
                         </StackPanel>
-                      <!--  <TextBlock FontSize="8" Text="{x:Bind Date}" HorizontalAlignment="Center" Grid.Column="1"/> !-->
+                        <StackPanel Margin="22" Padding="10" Grid.Column="1">
+                            <TextBlock FontSize="14" Text="{x:Bind Date}" HorizontalAlignment="Center" VerticalAlignment="Center" />
+                        </StackPanel>
+            
                     </Grid>
                 </DataTemplate>
             </ListView.ItemTemplate>
