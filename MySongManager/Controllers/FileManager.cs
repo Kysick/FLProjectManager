@@ -68,10 +68,23 @@ namespace SongManagerFL.Controllers
                 list.Add(new MusicProject(folder.DisplayName, folder.Path, basic.DateModified.DateTime));
             }
 
+            //OrderBy date modified
+            list = new ObservableCollection<MusicProject>(list.OrderByDescending(x => x.Date));
+
             return list;
         }
 
-        
+        public async 
+        Task
+DeleteProjectFolder(string path, string name)
+        {
+   
+            StorageFolder  projectsFolder = await KnownFolders.MusicLibrary.GetFolderAsync("SongManagerProjects");   
+            StorageFolder deletedFolder = await projectsFolder.GetFolderAsync(name);
+            await deletedFolder.DeleteAsync();
+
+        }
+
 
 
 

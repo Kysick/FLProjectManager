@@ -20,12 +20,16 @@
                  RelativePanel.LeftOf="AddButton"
                  RelativePanel.AlignLeftWithPanel="True" TextChanged="OnFilterChanged"/>
 
+            <TextBlock x:Name="ProjectsText" RelativePanel.Below="SearchBox" RelativePanel.AlignLeftWithPanel="True" Text="Recent projects:" FontSize="25" Padding="10"/>
+
+
 
             <ListView x:Name="filesList" IsItemClickEnabled="True" ItemClick="filesList_SelectionChanged"  
-                      RelativePanel.Below="SearchBox" 
-                      RelativePanel.AlignLeftWithPanel="True" Margin="10"   
+                      RelativePanel.Below="ProjectsText" 
+                      RelativePanel.AlignLeftWithPanel="True" Margin="10,20,30,40"   
                       RelativePanel.AlignRightWithPanel="True"
                        BorderThickness="1"
+                      
     BorderBrush="{ThemeResource SystemControlForegroundBaseMediumLowBrush}"
                                 
                       >

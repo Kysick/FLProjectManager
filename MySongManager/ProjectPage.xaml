@@ -9,24 +9,23 @@
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
 
     <Grid>
-        <Grid.RowDefinitions>
-            <RowDefinition Height="Auto"/>
-            <RowDefinition Height="*"/>
-        </Grid.RowDefinitions>
+        <RelativePanel>
 
-        <CommandBar>
-            <CommandBar.Content>
-                <Button x:Name="BackButton"
+            <CommandBar x:Name="CommandBar" RelativePanel.AlignTopWithPanel="True" RelativePanel.AlignLeftWithPanel="True" RelativePanel.AlignRightWithPanel="True"  OverflowButtonVisibility="Collapsed">
+                <CommandBar.Content>
+                    <Button x:Name="BackButton" Click="BackButton_Click"
                         Style="{StaticResource NavigationBackButtonNormalStyle}"
-                        IsEnabled="{x:Bind Frame.CanGoBack, Mode=OneWay}" 
+                        IsEnabled="True" 
                         ToolTipService.ToolTip="Back" 
                         VerticalAlignment="Top"/>
-                
-            </CommandBar.Content>
-            <AppBarButton Icon="Delete" Label="Delete"/>
-        </CommandBar>
+                </CommandBar.Content>
 
-     <!-- <TextBlock HorizontalAlignment="Left" Margin="55,3,0,0" TextWrapping="Wrap" Text="ProjectName" VerticalAlignment="Top" FontSize="40" x:Name="Title"/> -->
+                <AppBarButton Icon="Delete" Label="Delete" x:Name="DeleteButton" Click="DeleteButton_Click"/>
+            </CommandBar>
+
+            <TextBlock RelativePanel.Below="CommandBar" HorizontalAlignment="Left"  TextWrapping="Wrap" Text="ProjectName" VerticalAlignment="Top" FontSize="40" x:Name="Title" Padding="10"/>
+
+        </RelativePanel>
     </Grid>
   
 </Page>

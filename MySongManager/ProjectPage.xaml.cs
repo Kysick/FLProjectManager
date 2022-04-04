@@ -1,4 +1,5 @@
-﻿using System;
+﻿using SongManagerFL.Controllers;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -22,6 +23,8 @@ namespace MySongManager
     /// </summary>
     public sealed partial class ProjectPage : Page
     {
+        public MusicProject CurrentMS { get; set;}
+
         public ProjectPage()
         {
             this.InitializeComponent();
@@ -29,8 +32,21 @@ namespace MySongManager
 
         protected override void OnNavigatedTo(NavigationEventArgs e)
         {
-            MusicProject currentMS = (MusicProject)e.Parameter;
-           // Title.Text = currentMS.ProjectName;
+            CurrentMS = (MusicProject)e.Parameter;
+            Title.Text = CurrentMS.ProjectName;           
+        }
+
+        private void BackButton_Click(object sender, RoutedEventArgs e)
+        {
+            Frame.Navigate(typeof(MainPage));
+        }
+
+        private void DeleteButton_Click(object sender, RoutedEventArgs e)
+        {
+
+            FileManager fm = new FileManager();
+            _ = fm.DeleteProjectFolder(CurrentMS.ProjectPath, CurrentMS.ProjectName);
+            BackButton_Click(sender, e);
         }
     }
 }

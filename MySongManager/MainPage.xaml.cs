@@ -39,14 +39,24 @@ namespace MySongManager
 
 
         }
-
-        private async void Page_Loaded(object sender, RoutedEventArgs e)
+        protected override async void OnNavigatedTo(NavigationEventArgs e)
         {
             MusicProjects = await fm.FillMusicProjectList();
             FilteredMusicProjects = MusicProjects;
             filesList.ItemsSource = FilteredMusicProjects;
+        }
+
+        private async void Page_Loaded(object sender, RoutedEventArgs e)
+        {
+           
+            MusicProjects = await fm.FillMusicProjectList();
+            FilteredMusicProjects = MusicProjects;
+            filesList.ItemsSource = FilteredMusicProjects;
+   
 
         }
+        
+
         private void filesList_SelectionChanged(object sender, ItemClickEventArgs e)
         {
             MusicProject selectedProject = (MusicProject)e.ClickedItem;
