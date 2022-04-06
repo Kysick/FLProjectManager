@@ -27,7 +27,7 @@ namespace MySongManager
         public ObservableCollection<MusicProject> MusicProjects { get; set; }
         public ObservableCollection<MusicProject> FilteredMusicProjects { get; set; }
 
-       
+
 
         FileManager fm;
         public MainPage()
@@ -48,14 +48,14 @@ namespace MySongManager
 
         private async void Page_Loaded(object sender, RoutedEventArgs e)
         {
-           
+
             MusicProjects = await fm.FillMusicProjectList();
             FilteredMusicProjects = MusicProjects;
             filesList.ItemsSource = FilteredMusicProjects;
-   
+
 
         }
-        
+
 
         private void filesList_SelectionChanged(object sender, ItemClickEventArgs e)
         {

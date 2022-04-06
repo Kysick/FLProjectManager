@@ -1,6 +1,7 @@
 ﻿using SongManagerFL.Controllers;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.IO;
 using System.Linq;
 using System.Runtime.InteropServices.WindowsRuntime;
@@ -23,17 +24,21 @@ namespace MySongManager
     /// </summary>
     public sealed partial class ProjectPage : Page
     {
-        public MusicProject CurrentMS { get; set;}
-
+        public MusicProject CurrentMS { get; set; }
+        public ObservableCollection<MusicProject> MusicDemoProjects { get; set; }
         public ProjectPage()
         {
             this.InitializeComponent();
         }
 
-        protected override void OnNavigatedTo(NavigationEventArgs e)
+        protected override async void OnNavigatedTo(NavigationEventArgs e)
         {
+            FileManager fm = new FileManager();
             CurrentMS = (MusicProject)e.Parameter;
-            Title.Text = CurrentMS.ProjectName;           
+            Title.Text = CurrentMS.ProjectName;
+            ProjectPath.Text = CurrentMS.ProjectPath;
+            MusicDemoProjects = await fm.FillMusicProjectDemosList(CurrentMS.ProjectName);
+            ProjectDemosList.ItemsSource = MusicDemoProjects;
         }
 
         private void BackButton_Click(object sender, RoutedEventArgs e)
@@ -46,7 +51,21 @@ namespace MySongManager
 
             FileManager fm = new FileManager();
             _ = fm.DeleteProjectFolder(CurrentMS.ProjectPath, CurrentMS.ProjectName);
+            _ = fm.DecomposeProjectsAsync();
             BackButton_Click(sender, e);
+        }
+
+        private void OpenProjectBTN_Click(object sender, RoutedEventArgs e)
+        {
+            FileManager fm = new FileManager();
+            fm.DefaultLaunch(CurrentMS.ProjectName, CurrentMS.ProjectName + ".flp");
+        }
+
+        private void ProjectDemosList_ItemClick(object sender, ItemClickEventArgs e)
+        {
+            FileManager fm = new FileManager();
+            MusicProject currentSong = (MusicProject) e.ClickedItem; 
+            fm.DefaultLaunch(CurrentMS.ProjectName, currentSong.ProjectName + ".mp3");
         }
     }
 }

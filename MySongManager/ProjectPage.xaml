@@ -25,7 +25,47 @@
 
             <TextBlock RelativePanel.Below="CommandBar" HorizontalAlignment="Left"  TextWrapping="Wrap" Text="ProjectName" VerticalAlignment="Top" FontSize="40" x:Name="Title" Padding="10"/>
 
+            <RelativePanel    x:Name="FLPanel" Margin="10,20,30,40"
+                              RelativePanel.Below="Title" RelativePanel.AlignLeftWithPanel="True" RelativePanel.AlignRightWithPanel="True" 
+                              Padding="20"
+                              BorderThickness="1"
+                              BorderBrush="{ThemeResource SystemControlForegroundBaseMediumLowBrush}">
+                <Image x:Name="FlImage" Source="/Assets/FLStudioLogo.png" Height="50" Width="50" RelativePanel.AlignBottomWithPanel="True" RelativePanel.AlignVerticalCenterWithPanel="True">
+                </Image>
+                <TextBlock x:Name="ProjectPath" RelativePanel.LeftOf="OpenProjectBTN" RelativePanel.RightOf="FlImage" RelativePanel.AlignBottomWithPanel="True"  MinWidth="200" FontSize="20" Margin="10"/>
+                <Button  x:Name="OpenProjectBTN" Content="Open Project" RelativePanel.AlignRightWithPanel="True" Height="50" Click="OpenProjectBTN_Click" />
+
+            </RelativePanel>
+
+            <ListView x:Name="ProjectDemosList" IsItemClickEnabled="True" ItemClick="ProjectDemosList_ItemClick" 
+                      RelativePanel.Below="FLPanel" 
+                      RelativePanel.AlignLeftWithPanel="True" Margin="10,20,30,40"   
+                      RelativePanel.AlignRightWithPanel="True"                     
+                       BorderThickness="1">
+
+                <ListView.ItemTemplate>
+                    <DataTemplate x:DataType="local:MusicProject" >
+                        <RelativePanel >
+
+
+                            <TextBlock x:Name="ProjectName" FontSize="20" Text="{x:Bind ProjectName}" RelativePanel.AlignLeftWithPanel="True"   Padding="5"/>
+                            <TextBlock x:Name="ProjectPath" FontSize="14" Text="{x:Bind ProjectPath}" Opacity="0.5" RelativePanel.AlignLeftWithPanel="True" RelativePanel.Below="ProjectName" Padding="10"/>
+
+
+                            <TextBlock x:Name="DateModified"  FontSize="14" Text="{x:Bind Date}"  RelativePanel.AlignVerticalCenterWithPanel="True" MinWidth="200" RelativePanel.AlignRightWithPanel="True" RelativePanel.AlignRightWith="ProjectPath"/>
+
+
+                        </RelativePanel>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+                <ListView.ItemContainerStyle>
+                    <Style TargetType="ListViewItem">
+                        <Setter Property="HorizontalContentAlignment" Value="Stretch" />
+                    </Style>
+                </ListView.ItemContainerStyle>
+            </ListView>
+
         </RelativePanel>
     </Grid>
-  
+
 </Page>

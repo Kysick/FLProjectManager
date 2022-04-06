@@ -10,7 +10,7 @@
 
     <Grid x:Name="Grid">
 
-        
+
         <RelativePanel  Background="{ThemeResource ApplicationPageBackgroundThemeBrush}" RelativePanel.AlignTopWithPanel="True" >
 
             <Button x:Name="AddButton" Content="New Project" Margin="10"
@@ -30,21 +30,19 @@
                       RelativePanel.AlignRightWithPanel="True"
                        BorderThickness="1"
                       
-    BorderBrush="{ThemeResource SystemControlForegroundBaseMediumLowBrush}"
-                                
-                      >
-                
+    BorderBrush="{ThemeResource SystemControlForegroundBaseMediumLowBrush}">
+
                 <ListView.ItemTemplate>
                     <DataTemplate x:DataType="local:MusicProject" >
                         <RelativePanel >
-                           
-                            
+
+
                             <TextBlock x:Name="ProjectName" FontSize="20" Text="{x:Bind ProjectName}" RelativePanel.AlignLeftWithPanel="True"   Padding="5"/>
                             <TextBlock x:Name="ProjectPath" FontSize="14" Text="{x:Bind ProjectPath}" Opacity="0.5" RelativePanel.AlignLeftWithPanel="True" RelativePanel.Below="ProjectName" Padding="10"/>
 
 
                             <TextBlock x:Name="DateModified"  FontSize="14" Text="{x:Bind Date}"  RelativePanel.AlignVerticalCenterWithPanel="True" MinWidth="200" RelativePanel.AlignRightWithPanel="True" RelativePanel.AlignRightWith="ProjectPath"/>
-                        
+
 
                         </RelativePanel>
                     </DataTemplate>
@@ -58,7 +56,7 @@
 
         </RelativePanel>
 
-        
-       
+
+
     </Grid>
 </Page>

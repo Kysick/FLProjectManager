@@ -26,7 +26,7 @@ namespace MySongManager
 
         public string ProjectPath { get => _projectPath; set => _projectPath = value; }
         public DateTime Date { get => _date; set => _date = value; }
-       
+
 
     }
 }
