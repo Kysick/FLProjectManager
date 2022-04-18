@@ -5,6 +5,7 @@ using System.Collections.ObjectModel;
 using System.IO;
 using System.Linq;
 using System.Runtime.InteropServices.WindowsRuntime;
+using System.Threading.Tasks;
 using Windows.Foundation;
 using Windows.Foundation.Collections;
 using Windows.Storage;
@@ -103,5 +104,17 @@ namespace MySongManager
 
 
         }
+
+        private async void AddButton_Click(object sender, RoutedEventArgs e)
+        {
+            var dialog1 = new AddProjectDialog();
+            var result = await dialog1.ShowAsync();
+            if (result == ContentDialogResult.Primary)
+            {
+                var text = dialog1.Text;
+                Console.Write(text);
+            }
+        }
+       
     }
 }

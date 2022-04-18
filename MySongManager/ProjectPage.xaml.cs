@@ -7,6 +7,7 @@ using System.Linq;
 using System.Runtime.InteropServices.WindowsRuntime;
 using Windows.Foundation;
 using Windows.Foundation.Collections;
+using Windows.Storage;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Controls.Primitives;
@@ -37,7 +38,8 @@ namespace MySongManager
             CurrentMS = (MusicProject)e.Parameter;
             Title.Text = CurrentMS.ProjectName;
             ProjectPath.Text = CurrentMS.ProjectPath;
-            MusicDemoProjects = await fm.FillMusicProjectDemosList(CurrentMS.ProjectName);
+            MusicDemoProjects =  await fm.GetProjectFiles(CurrentMS.ProjectName);
+            
             ProjectDemosList.ItemsSource = MusicDemoProjects;
         }
 
@@ -58,14 +60,14 @@ namespace MySongManager
         private void OpenProjectBTN_Click(object sender, RoutedEventArgs e)
         {
             FileManager fm = new FileManager();
-            fm.DefaultLaunch(CurrentMS.ProjectName, CurrentMS.ProjectName + ".flp");
+            fm.ProjectLaunch(CurrentMS.ProjectName);
         }
 
         private void ProjectDemosList_ItemClick(object sender, ItemClickEventArgs e)
         {
             FileManager fm = new FileManager();
             MusicProject currentSong = (MusicProject) e.ClickedItem; 
-            fm.DefaultLaunch(CurrentMS.ProjectName, currentSong.ProjectName + ".mp3");
+            fm.DefaultLaunch(currentSong.StorageFile);
         }
     }
 }

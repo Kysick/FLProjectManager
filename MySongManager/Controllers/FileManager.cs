@@ -103,13 +103,69 @@ namespace SongManagerFL.Controllers
             await deletedFolder.DeleteAsync();
 
         }
-       public async void DefaultLaunch(string projectName, string fileName)
+
+        public async Task<ObservableCollection<MusicProject>> GetProjectFiles(string projectName)
+        {
+            ObservableCollection<MusicProject> files = new ObservableCollection<MusicProject>();
+            IStorageFolder mainFolder = await KnownFolders.MusicLibrary.GetFolderAsync("SongManagerProjects");
+            IStorageFolder projectFolder = await mainFolder.GetFolderAsync(projectName);
+            var filesList = await projectFolder.GetFilesAsync();
+            foreach(var file in filesList)
+            {
+                if (file.Name.Contains(".flp"))
+                    continue;
+                BasicProperties basic = await file.GetBasicPropertiesAsync();
+                files.Add(new MusicProject(file.DisplayName, file.Path, basic.DateModified.DateTime, file));
+            }
+            return files;
+        }
+       public async void CreateFLProject(string name)
+        {
+
+        }
+
+        public async void CreateProject(string projectName)
+        {
+
+        }
+
+        public async void ProjectLaunch(string projectName)
         {
             IStorageFolder projectsFolder = await KnownFolders.MusicLibrary.GetFolderAsync("SongManagerProjects");
             IStorageFolder currentProject = await projectsFolder.GetFolderAsync(projectName);
+
             try
             {
-                IStorageFile file = await currentProject.GetFileAsync(fileName);
+                IStorageFile file = await currentProject.GetFileAsync(projectName + ".flp");
+
+                if (file != null)
+                {
+                    // Launch the retrieved file
+                    var success = await Windows.System.Launcher.LaunchFileAsync(file);
+
+                    if (success)
+                    {
+                        // File launched
+                    }
+                    else
+                    {
+                        // File launch failed
+                    }
+                }
+                else
+                {
+                    // Could not find file
+                }
+            }
+            catch (Exception ex) { }
+
+        }
+
+        public async void DefaultLaunch(IStorageFile file)
+        {
+           
+            try
+            {              
 
                 if (file != null)
                 {
