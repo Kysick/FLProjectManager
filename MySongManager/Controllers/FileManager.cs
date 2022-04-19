@@ -22,8 +22,8 @@ namespace SongManagerFL.Controllers
         {
             //Generating folder for projects 
 
-            if (!Directory.Exists(mainFolder.Path + "/SongManagerProjects"))
-                _ = mainFolder.CreateFolderAsync("SongManagerProjects");
+                if (!Directory.Exists(mainFolder.Path + "/SongManagerProjects"))
+                    _ = mainFolder.CreateFolderAsync("SongManagerProjects");
 
         }
 
@@ -119,13 +119,24 @@ namespace SongManagerFL.Controllers
             }
             return files;
         }
-       public async void CreateFLProject(string name)
-        {
-
-        }
+   
 
         public async void CreateProject(string projectName)
         {
+           StorageFolder projectsFolder = await KnownFolders.MusicLibrary.GetFolderAsync("SongManagerProjects");
+
+            if (!Directory.Exists(projectsFolder.Path + "/" + projectName))
+            {
+                await projectsFolder.CreateFolderAsync(projectName);
+                StorageFolder newProject = await projectsFolder.GetFolderAsync(projectName);
+                await newProject.CreateFileAsync(projectName + ".flp");
+                
+                ProjectLaunch(projectName);
+
+            }
+               
+
+           
 
         }
 

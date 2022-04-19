@@ -111,8 +111,9 @@ namespace MySongManager
             var result = await dialog1.ShowAsync();
             if (result == ContentDialogResult.Primary)
             {
-                var text = dialog1.Text;
-                Console.Write(text);
+                FileManager fm = new FileManager();
+                fm.CreateProject(dialog1.Text);
+                           
             }
         }
        
