@@ -9,9 +9,9 @@
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
 
     <Grid>
-        <RelativePanel>
+        <RelativePanel  Background="#192227">
 
-            <CommandBar x:Name="CommandBar" RelativePanel.AlignTopWithPanel="True" RelativePanel.AlignLeftWithPanel="True" RelativePanel.AlignRightWithPanel="True"  OverflowButtonVisibility="Collapsed">
+            <CommandBar Background="#192227" x:Name="CommandBar" RelativePanel.AlignTopWithPanel="True" RelativePanel.AlignLeftWithPanel="True" RelativePanel.AlignRightWithPanel="True"  OverflowButtonVisibility="Collapsed">
                 <CommandBar.Content>
                     <Button x:Name="BackButton" Click="BackButton_Click"
                         Style="{StaticResource NavigationBackButtonNormalStyle}"

@@ -6,16 +6,21 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d" Loaded="Page_Loaded"
-    Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+    Background="#313c45">
 
+    <Page.Resources>
+        <SolidColorBrush x:Key="FlPrimaryColor" Color="#313c45" />
+    </Page.Resources>
+    
     <Grid x:Name="Grid">
 
 
-        <RelativePanel  Background="{ThemeResource ApplicationPageBackgroundThemeBrush}" RelativePanel.AlignTopWithPanel="True" >
+        <RelativePanel  Background="#192227" RelativePanel.AlignTopWithPanel="True" >
 
             <Button x:Name="AddButton" Content="New Project" Margin="10" Click="AddButton_Click"
                 RelativePanel.AlignTopWithPanel="True"
-                RelativePanel.AlignRightWithPanel="True"/>
+                RelativePanel.AlignRightWithPanel="True"
+                    Background="#525a5e"/>
             <TextBox x:Name="SearchBox" Margin="10"
                  RelativePanel.LeftOf="AddButton"
                  RelativePanel.AlignLeftWithPanel="True" TextChanged="OnFilterChanged"/>
@@ -25,24 +30,22 @@
 
 
             <ListView x:Name="filesList" IsItemClickEnabled="True" ItemClick="filesList_SelectionChanged"  
+                      Background="#192227"  
                       RelativePanel.Below="ProjectsText" 
-                      RelativePanel.AlignLeftWithPanel="True" Margin="10,20,30,40"   
+                      RelativePanel.AlignLeftWithPanel="True" Margin="10,20,30,10"   
                       RelativePanel.AlignRightWithPanel="True"
-                       BorderThickness="1"
+                      BorderThickness="1"
                       
     BorderBrush="{ThemeResource SystemControlForegroundBaseMediumLowBrush}">
 
-                <ListView.ItemTemplate>
-                    <DataTemplate x:DataType="local:MusicProject" >
+                
+                <ListView.ItemTemplate >
+                    
+                    <DataTemplate x:DataType="local:MusicProject"  >
                         <RelativePanel >
-
-
                             <TextBlock x:Name="ProjectName" FontSize="20" Text="{x:Bind ProjectName}" RelativePanel.AlignLeftWithPanel="True"   Padding="5"/>
                             <TextBlock x:Name="ProjectPath" FontSize="14" Text="{x:Bind ProjectPath}" Opacity="0.5" RelativePanel.AlignLeftWithPanel="True" RelativePanel.Below="ProjectName" Padding="10"/>
-
-
                             <TextBlock x:Name="DateModified"  FontSize="14" Text="{x:Bind Date}"  RelativePanel.AlignVerticalCenterWithPanel="True" MinWidth="200" RelativePanel.AlignRightWithPanel="True" RelativePanel.AlignRightWith="ProjectPath"/>
-
 
                         </RelativePanel>
                     </DataTemplate>
@@ -50,6 +53,8 @@
                 <ListView.ItemContainerStyle>
                     <Style TargetType="ListViewItem">
                         <Setter Property="HorizontalContentAlignment" Value="Stretch" />
+                        <Setter Property="Padding" Value="5"/>
+                        <Setter Property="Background" Value="#192227"/>
                     </Style>
                 </ListView.ItemContainerStyle>
             </ListView>

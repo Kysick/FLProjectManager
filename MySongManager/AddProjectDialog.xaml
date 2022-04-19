@@ -14,7 +14,10 @@
     mc:Ignorable="d"
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
 
-    <Grid>
-        <TextBox Text="{Binding ElementName=ContentDialog, Path=Text, Mode=TwoWay}" x:Name="ProjectName" />
+    <Grid >
+ 
+            <TextBox Text="{Binding ElementName=ContentDialog, Path=Text, Mode=TwoWay}" x:Name="ProjectName" />
+
+        
     </Grid>
 </ContentDialog>
